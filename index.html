@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LumiCall - Videollamadas con AI</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Estilos adicionales para la sección de video */
+    #videoSection {
+      padding: 50px;
+      text-align: center;
+      background: #fff;
+    }
+    #videoSection h2 {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
   <!-- Header con logo y navegación -->
@@ -32,9 +43,50 @@
     <button class="cta-button">Comenzar Ahora</button>
   </section>
 
+  <!-- Sección de Video -->
+  <section id="videoSection">
+    <h2>Video de Presentación</h2>
+    <video id="tavusVideo" controls width="640" height="360">
+      Tu navegador no soporta el elemento de video.
+    </video>
+  </section>
+
   <!-- Footer -->
   <footer>
     &copy; 2025 LumiCall. Todos los derechos reservados.
   </footer>
+
+  <!-- Script para generar e incorporar el video de Tavus -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Reemplaza <api-key> con tu clave real
+      const apiKey = "<api-key>";
+      fetch("https://prod-api.tavus.io/proxy/rqh/v2/videos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": 5ad6ccb726c444e3851f5eeee15ec514
+        },
+        body: JSON.stringify({
+          replica_id: "r8bfa69a42",
+          script: "Hola, Soy Laura, estoy en mi oficina Rosa, soy solo una muestra de lo que puedo ofrecer desde la plataforma, no solo puedo estar yo, sino que tenemos miles de personas trabajando en conjunto para poder solucionar tus problemas.\nNo dudes en consultar todo lo que quieras."
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Respuesta del API:", data);
+        // Suponemos que el JSON tiene un campo "video_url"
+        const videoElement = document.getElementById("tavusVideo");
+        if (videoElement && data.video_url) {
+          videoElement.src = data.video_url;
+        } else {
+          console.error("No se encontró 'video_url' en la respuesta:", data);
+        }
+      })
+      .catch(error => {
+        console.error("Error al generar el video:", error);
+      });
+    });
+  </script>
 </body>
 </html>
