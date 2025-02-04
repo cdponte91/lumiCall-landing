@@ -60,12 +60,12 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Reemplaza <api-key> con tu clave real
-      const apiKey = "<api-key>";
+      const apiKey = "5ad6ccb726c444e3851f5eeee15ec514";
       fetch("https://prod-api.tavus.io/proxy/rqh/v2/videos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": 5ad6ccb726c444e3851f5eeee15ec514
+          "x-api-key": apiKey
         },
         body: JSON.stringify({
           replica_id: "r8bfa69a42",
